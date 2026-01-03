@@ -14,7 +14,7 @@ This package allows you to turn images (only `.jpg` and `.png` tested) into ASCI
 Inspired by [ascii-view](https://github.com/gouwsxander/ascii-view/tree/main).
 # Documentation
 Full documentation is available at:
-**[asciify.readthedocs.io](https://asciify.readthedocs.io)**
+**[asciify-them.readthedocs.io](https://asciify-them.readthedocs.io/en/latest/)**
 
 # Features
 - **CLI**: This software can be accessed both as a Python library and as a CLI;

@@ -26,7 +26,7 @@ classifiers = [
 
 [project.urls]
 Homepage = "https://github.com/ndrscalia/asciify-them"
-Documentation = "https://asciify.readthedocs.io"
+Documentation = "https://asciify-them.readthedocs.io/en/latest/"
 Issues = "https://github.com/ndrscalia/asciify-them/issues"
 
 [project.scripts]
