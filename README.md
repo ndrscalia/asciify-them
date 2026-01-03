@@ -31,6 +31,7 @@ pip install asciify-them
 But also from source:
 ```
 git clone https://github.com/ndrscalia/asciify-them
+cd <repo-dir>
 python -m venv .venv
 source .venv/bin/activate
 pip install -e .
