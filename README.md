@@ -37,6 +37,7 @@ source .venv/bin/activate
 pip install -e .
 ```
 # Usage
+This package requires a terminal emulator with true color support (e.g. kitty, alacritty, iTerm2).
 ## CLI
 The only required argument is the path to the image:
 ```
