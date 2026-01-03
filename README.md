@@ -82,6 +82,8 @@ with open("output.txt", "w") as f:
 The `.txt` output can be used with `ansee` to get a `.png` file out of it.<br/>
 If needed, the core classes can be used as follows:
 ```
+from asciify import ImgeProcessor, Renderer, DEFAULT_CHARSET
+
 processor = ImgProcessor(image_path)
 
 if not height and not width:
