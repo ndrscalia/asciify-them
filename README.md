@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="./cover_photos/banner.png" alt="Cover photo" />
+    <img src="https://raw.githubusercontent.com/ndrscalia/asciify-them/main/cover_photos/banner.png" alt="Cover photo" />
     <br/>
     <img src="https://api.visitorbadge.io/api/VisitorHit?user=ndrscalia&repo=github-visitors-badge&countColor=%237B1E7A" />
     <br/>
@@ -126,7 +126,7 @@ else:
 ```
 # Examples
 <p align="center">
-    <img src="./cover_photos/side_by_side.jpg" alt="Example photo" />
+    <img src=".https://raw.githubusercontent.com/ndrscalia/asciify-them/main/cover_photos/side_by_side.jpg" alt="Example photo" />
     <br/>
     </p>
 
