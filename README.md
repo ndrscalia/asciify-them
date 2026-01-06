@@ -26,7 +26,11 @@ Full documentation is available at:
 # Installation
 The package can be installed through PyPi:<br/>
 ```
+# using pip
 pip install asciify-them
+
+# or using uv
+uv tool install asciify-them
 ```
 But also from source:
 ```
@@ -35,6 +39,10 @@ cd <repo-dir>
 python -m venv .venv
 source .venv/bin/activate
 pip install -e .
+```
+The software can also be used without installing it through uv:
+```
+uvx --from asciify-them asciify path/to/image [OPTIONS]
 ```
 # Usage
 This package requires a terminal emulator with true color support (e.g. kitty, alacritty, iTerm2).
