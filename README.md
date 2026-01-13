@@ -85,7 +85,7 @@ result = asciify(
     color_mode="bw",
     edges_detection=True,
     f_type="tall",
-    aspect_ratio_correction=1.20
+    aspect_ratio_correction=1.10
 )
 
 with open("output.txt", "w") as f:
@@ -95,6 +95,8 @@ The `.txt` output can be used with `ansee` to get a `.png` file out of it.<br/>
 If needed, the core classes can be used as follows:
 ```python
 from asciify import ImgProcessor, Renderer, DEFAULT_CHARSET
+
+ASPECT_RATIO_CORRECTION = 1.10
 
 processor = ImgProcessor(image_path)
 
@@ -107,13 +109,14 @@ ds_f = processor.calculate_downsample_factor(
     term_height=term_height,
     term_width=term_width,
     keep_aspect_ratio=keep_aspect_ratio,
-    f_type=f_type
+    f_type=f_type,
+    aspect_ratio_correction=ASPECT_RATIO_CORRECTION
 )
 
 ds_img = processor.downsample_image(
     f=ds_f,
     keep_aspect_ratio=keep_aspect_ratio,
-    aspect_ratio_correction=1.10
+    aspect_ratio_correction=ASPECT_RATIO_CORRECTION
 )
 
 img_hsv = processor.convert_to_hsv(image=ds_img)
