@@ -1,6 +1,7 @@
-# Tests for Asciify
+# Tests for asciify
 
-This directory contains the test suite for the asciify package.
+This directory contains the test suite for the `asciify` package.
+Disclaimer: this test suite has been created with the aid of claude-code and then revised by the software's author.
 
 ## Test Structure
 
@@ -11,19 +12,19 @@ This directory contains the test suite for the asciify package.
 
 ## Running Tests
 
-### Install test dependencies
+Install test dependencies.
 
 ```bash
 pip install -e ".[dev]"
 ```
 
-### Run all tests
+Run all tests.
 
 ```bash
 pytest
 ```
 
-### Run with coverage report
+Run with coverage report.
 
 ```bash
 pytest --cov=asciify --cov-report=html
@@ -31,21 +32,14 @@ pytest --cov=asciify --cov-report=html
 
 Then open `htmlcov/index.html` in your browser to see detailed coverage.
 
-### Run specific test file
+Run specific test file.
 
 ```bash
 pytest tests/test_core.py
 ```
 
-### Run specific test
+Run specific test.
 
 ```bash
 pytest tests/test_core.py::TestAsciify::test_asciify_returns_string
 ```
-
-### Run with verbose output
-
-```bash
-pytest -v
-```
-
