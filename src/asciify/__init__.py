@@ -7,6 +7,6 @@ from .process import ImgProcessor
 from .renderer import Renderer
 from .utils import DEFAULT_CHARSET
 
-__version__ = "1.0.3"
+__version__ = "1.0.4"
 
 __all__: List[str] = ["asciify", "ImgProcessor", "Renderer", "DEFAULT_CHARSET"]

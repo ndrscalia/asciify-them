@@ -174,6 +174,8 @@ print(result)
 To test the codebase check `tests/README.md`.
 
 # Changelog
+- 1.0.4
+    - Fix to get char's aspect ratio in the terminal in non-Unix systems.
 - 1.0.3
     - Add aspect ratio correction flag to account for line spacing.
 - 1.0.2
