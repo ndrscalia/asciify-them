@@ -1,4 +1,4 @@
-name: Create Release
+name: Test, Build, and Release
 
 on:
   push:
@@ -6,14 +6,44 @@ on:
       - 'v*'
 
 jobs:
-  release:
+  test-and-release:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      id-token: write  # Required for trusted publishing to PyPI
+
     steps:
       - uses: actions/checkout@v4
-      
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Run ruff checks
+        run: |
+          ruff check src/
+          ruff format --check src/
+
+      - name: Run tests
+        run: |
+          pytest
+
+      - name: Build package
+        run: |
+          pip install build
+          python -m build
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
+          files: dist/*
