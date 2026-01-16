@@ -91,19 +91,39 @@ result = asciify(
 with open("output.txt", "w") as f:
     f.write(result)
 ```
+
 The `.txt` output can be used with `ansee` to get a `.png` file out of it.<br/>
 If needed, the core classes can be used as follows:
+
 ```python
 from asciify import ImgProcessor, Renderer, DEFAULT_CHARSET
 
+# Configs
+IMAGE_PATH = "examples/images/girl.jpg"  # Change this to a real image path
 ASPECT_RATIO_CORRECTION = 1.10
 
-processor = ImgProcessor(image_path)
+# Optional parameters (set to None to use terminal size)
+height = None
+width = None
+
+# Processing options
+# default values
+keep_aspect_ratio = True
+f_type = "in_terminal"  # Options: "in_terminal", "wide", "tall"
+angles_thresh = 3
+blur = [(9, 9), 1.5, 1.5]
+canny_thresh = (200, 300)
+color_mode = "color"  # Options: "color", "bw"
+edges_detection = False
+
+# Process the image
+processor = ImgProcessor(IMAGE_PATH)
 
 if not height and not width:
     term_height, term_width = processor.calculate_print_size()
 else:
-    term_height, term_width = height, width
+    term_height = height if height else 40
+    term_width = width if width else 100
 
 ds_f = processor.calculate_downsample_factor(
     term_height=term_height,
@@ -138,9 +158,11 @@ renderer = Renderer(
 )
 
 if edges_detection:
-    return renderer.draw_in_ascii_with_edges(img_hsv=img_hsv, angles=angles, edges=edges)
+    result = renderer.draw_in_ascii_with_edges(img_hsv=img_hsv, angles=angles, edges=edges)
 else:
-    return renderer.draw_in_ascii(img_hsv=img_hsv)
+    result = renderer.draw_in_ascii(img_hsv=img_hsv)
+
+print(result)
 ```
 # Examples
 <p align="center">
