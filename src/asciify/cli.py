@@ -2,6 +2,7 @@ import argparse
 from pathlib import Path
 
 from .core import asciify
+from .utils import CHARSET_PRESETS
 
 
 def main():
@@ -100,6 +101,21 @@ def main():
         help="Aspect ratio correction (default to 1.10)",
     )
 
+    charset_group = parser.add_mutually_exclusive_group()
+    charset_group.add_argument(
+        "-c",
+        "--charset",
+        type=list[str],
+        help="Provide custom charset as a string of characters(e.g. ' .:-=@'). Quotes are needed to include a space",
+    )
+
+    charset_group.add_argument(
+            "-p",
+            "--preset",
+            choices=CHARSET_PRESETS.keys(),
+            help="Choose a predefined charset: %(choices)s"
+            )
+
     args = parser.parse_args()
 
     target_image = Path(args.image_path)
@@ -108,13 +124,21 @@ def main():
         print(f"Impossible to find {target_image}")
         raise SystemExit(1)
 
+    if args.preset:
+        charset = list(CHARSET_PRESETS[args.preset])
+    elif args.charset:
+        charset = args.charset
+    else:
+        charset = list(CHARSET_PRESETS["default"])
+
     kwargs = {
         "image_path": args.image_path,
         "color_mode": "bw" if args.black_white else "color",
         "edges_detection": args.edges,
         "f_type": "in_terminal" if not args.factor_type else args.factor_type,
         "keep_aspect_ratio": args.no_aspect_ratio,
-        "aspect_ratio_correction": args.aspect_ratio_correction
+        "aspect_ratio_correction": args.aspect_ratio_correction,
+        "charset": charset,
     }
 
     if args.width is not None:
