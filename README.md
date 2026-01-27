@@ -5,7 +5,6 @@
     <br/>
     <img src="https://img.shields.io/badge/python-3.9+-blue.svg"
    />
-    <img src="https://img.shields.io/github/license/ndrscalia/asciify-them" />
     <img src="https://img.shields.io/github/stars/ndrscalia/asciify-them?style=social" />
     <a href="https://asciify-them.readthedocs.io/en/latest/"><img src="https://img.shields.io/badge/docs-read%20the%20docs-blue" /></a>
   </p>
