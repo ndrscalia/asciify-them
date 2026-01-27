@@ -63,4 +63,4 @@ addopts = [
 line-length = 88
 
 [tool.ruff.lint]
-select = ["E501", "I"]
+select = ["I"]
