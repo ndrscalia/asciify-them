@@ -46,30 +46,15 @@ class Renderer:
         """
         h, s, v = pixel
         r, g, b = self.hsv_to_rgb(h, s, v)
-        if v <= 42:
-            line.append(f"\033[38;2;{r};{g};{b}m{self.charset[0]}")
-        elif v <= 61:
-            line.append(f"\033[38;2;{r};{g};{b}m{self.charset[1]}")
-        elif v <= 80:
-            line.append(f"\033[38;2;{r};{g};{b}m{self.charset[2]}")
-        elif v <= 99:
-            line.append(f"\033[38;2;{r};{g};{b}m{self.charset[3]}")
-        elif v <= 118:
-            line.append(f"\033[38;2;{r};{g};{b}m{self.charset[4]}")
-        elif v <= 137:
-            line.append(f"\033[38;2;{r};{g};{b}m{self.charset[5]}")
-        elif v <= 156:
-            line.append(f"\033[38;2;{r};{g};{b}m{self.charset[6]}")
-        elif v <= 175:
-            line.append(f"\033[38;2;{r};{g};{b}m{self.charset[7]}")
-        elif v <= 194:
-            line.append(f"\033[38;2;{r};{g};{b}m{self.charset[8]}")
-        elif v <= 213:
-            line.append(f"\033[38;2;{r};{g};{b}m{self.charset[9]}")
-        elif v <= 232:
-            line.append(f"\033[38;2;{r};{g};{b}m{self.charset[10]}")
-        elif v <= 255:
-            line.append(f"\033[38;2;{r};{g};{b}m{self.charset[11]}")
+        
+        v_steps = np.linspace(0, 255, len(self.charset) + 1)[1:].astype(int)
+        v_steps[-1] = 255
+
+        for index, step in enumerate(v_steps):
+            if v <= step:
+                line.append(f"\033[38;2;{r};{g};{b}m{self.charset[index]}")
+                break
+                
 
     def draw_char_bw(self, pixel: np.ndarray, line: list):
         """
@@ -82,30 +67,15 @@ class Renderer:
         """
         h, s, v = pixel
         r, g, b = self.hsv_to_rgb(h, s, v)
-        if v <= 42:
-            line.append(f"\033[38;2;255;255;255m{self.charset[0]}")
-        elif v <= 61:
-            line.append(f"\033[38;2;255;255;255m{self.charset[1]}")
-        elif v <= 80:
-            line.append(f"\033[38;2;255;255;255m{self.charset[2]}")
-        elif v <= 99:
-            line.append(f"\033[38;2;255;255;255m{self.charset[3]}")
-        elif v <= 118:
-            line.append(f"\033[38;2;255;255;255m{self.charset[4]}")
-        elif v <= 137:
-            line.append(f"\033[38;2;255;255;255m{self.charset[5]}")
-        elif v <= 156:
-            line.append(f"\033[38;2;255;255;255m{self.charset[6]}")
-        elif v <= 175:
-            line.append(f"\033[38;2;255;255;255m{self.charset[7]}")
-        elif v <= 194:
-            line.append(f"\033[38;2;255;255;255m{self.charset[8]}")
-        elif v <= 213:
-            line.append(f"\033[38;2;255;255;255m{self.charset[9]}")
-        elif v <= 232:
-            line.append(f"\033[38;2;255;255;255m{self.charset[10]}")
-        elif v <= 255:
-            line.append(f"\033[38;2;255;255;255m{self.charset[11]}")
+
+        v_steps = list(range(0, 256, 255//len(self.charset)))
+        v_steps.pop(0)
+        v_steps[-1] = 255
+
+        for index, step in enumerate(v_steps):
+            if v <= step:
+                line.append(f"\033[38;2;255;255;255m{self.charset[index]}")
+                break
 
     def draw_in_ascii(self, img_hsv: np.ndarray):
         """
