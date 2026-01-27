@@ -110,11 +110,11 @@ def main():
     )
 
     charset_group.add_argument(
-            "-p",
-            "--preset",
-            choices=CHARSET_PRESETS.keys(),
-            help="Choose a predefined charset: %(choices)s"
-            )
+        "-p",
+        "--preset",
+        choices=CHARSET_PRESETS.keys(),
+        help="Choose a predefined charset: %(choices)s",
+    )
 
     args = parser.parse_args()
 

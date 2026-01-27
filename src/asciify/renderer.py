@@ -46,7 +46,7 @@ class Renderer:
         """
         h, s, v = pixel
         r, g, b = self.hsv_to_rgb(h, s, v)
-        
+
         v_steps = np.linspace(0, 255, len(self.charset) + 1)[1:].astype(int)
         v_steps[-1] = 255
 
@@ -54,7 +54,6 @@ class Renderer:
             if v <= step:
                 line.append(f"\033[38;2;{r};{g};{b}m{self.charset[index]}")
                 break
-                
 
     def draw_char_bw(self, pixel: np.ndarray, line: list):
         """
@@ -68,7 +67,7 @@ class Renderer:
         h, s, v = pixel
         r, g, b = self.hsv_to_rgb(h, s, v)
 
-        v_steps = list(range(0, 256, 255//len(self.charset)))
+        v_steps = list(range(0, 256, 255 // len(self.charset)))
         v_steps.pop(0)
         v_steps[-1] = 255
 

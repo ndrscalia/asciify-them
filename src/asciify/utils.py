@@ -1,7 +1,7 @@
-import sys
 import colorsys
 import os
 import struct
+import sys
 
 import cv2
 import numpy as np
@@ -16,7 +16,9 @@ except ImportError:
 
 DEFAULT_CHARSET = " .-=+*x#$&X@"
 CLASSIC_GRADIENT = " .':;il!i><+?-)(ItfjxnoC00@"
-EXTENDED_SMOOTH_GRADIENT = "…^‚:;Il!i><v+_—?1[ł{1)(|/tfjrxnuvczXYUJCLQØ0Zmwqpdbkhао*#МW&8⅝В@$"
+EXTENDED_SMOOTH_GRADIENT = (
+    "…^‚:;Il!i><v+_—?1[ł{1)(|/tfjrxnuvczXYUJCLQØ0Zmwqpdbkhао*#МW&8⅝В@$"
+)
 BRAILLE_CHARSET = "⠀⣀⣄⣤⣦⣶⣷⣿"
 UNICODE_BLOCKS = " ░▒▓█"
 
@@ -25,8 +27,9 @@ CHARSET_PRESETS = {
     "classic": CLASSIC_GRADIENT,
     "extended": EXTENDED_SMOOTH_GRADIENT,
     "braille": BRAILLE_CHARSET,
-    "unicode_blocks" : UNICODE_BLOCKS,
-    }
+    "unicode_blocks": UNICODE_BLOCKS,
+}
+
 
 def hsv_to_ansi(h, s, v):
     """Convert HSV (OpenCV: h: 0-360, s: 0-100, v: 0-100) to ANSI escape code"""
@@ -53,6 +56,7 @@ def get_font_aspect_ratio_windows():
             return 2.0
 
         try:
+
             class TEXTMETRIC(ctypes.Structure):
                 _fields_ = [
                     ("tmHeight", wintypes.LONG),
@@ -94,6 +98,7 @@ def get_font_aspect_ratio_windows():
     except Exception:
         return 2.0
 
+
 def get_font_aspect_ratio():
     """Get terminal font aspect ratio dynamically.
 
@@ -103,7 +108,7 @@ def get_font_aspect_ratio():
     :return: Font aspect ratio (typically 1.8-2.2)
     :rtype: float
     """
-    
+
     if sys.platform == "win32":
         return get_font_aspect_ratio_windows()
 
@@ -128,6 +133,7 @@ def get_font_aspect_ratio():
 
     return 2.0
 
+
 def create_test():
     img = np.zeros((500, 500, 3), dtype=np.uint8)
 
@@ -141,4 +147,3 @@ def create_test():
 
     cv2.imwrite("test_square.png", img)
     print("Created test_square.png")
-

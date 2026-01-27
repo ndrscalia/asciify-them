@@ -35,6 +35,7 @@ class ImgProcessor:
                     t_size = os.get_terminal_size(tty.fileno())
             else:
                 import shutil
+
                 t_size = shutil.get_terminal_size()
 
             t_height = t_size.lines
@@ -115,7 +116,9 @@ class ImgProcessor:
 
             return f
 
-    def downsample_image(self, f: int, aspect_ratio_correction: float = 1.10, keep_aspect_ratio=True):
+    def downsample_image(
+        self, f: int, aspect_ratio_correction: float = 1.10, keep_aspect_ratio=True
+    ):
         """
         Downsample the input image.
 

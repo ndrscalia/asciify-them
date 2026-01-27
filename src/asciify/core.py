@@ -17,7 +17,7 @@ def asciify(
     canny_thresh: tuple[int, int] = (200, 300),
     angles_thresh: int = 3,
     aspect_ratio_correction: float = 1.10,
-    charset: list[str] = DEFAULT_CHARSET
+    charset: list[str] = DEFAULT_CHARSET,
 ) -> str:
     """
     Draw the input image in ASCII art. This function wraps the objects defined in ``process.py`` and ``renderer.py`` and orchestrate their workflow.
@@ -39,7 +39,11 @@ def asciify(
         f_type=f_type,
         aspect_ratio_correction=aspect_ratio_correction,
     )
-    ds_img = processor.downsample_image(f=ds_f, aspect_ratio_correction=aspect_ratio_correction, keep_aspect_ratio=keep_aspect_ratio)
+    ds_img = processor.downsample_image(
+        f=ds_f,
+        aspect_ratio_correction=aspect_ratio_correction,
+        keep_aspect_ratio=keep_aspect_ratio,
+    )
     img_hsv = processor.convert_to_hsv(image=ds_img)
     angles = processor.calculate_angles(image=ds_img, k_size=angles_thresh)
     edges = processor.detect_edges(image=ds_img, blur=blur, canny_thresh=canny_thresh)
