@@ -16,7 +16,8 @@ def asciify(
     blur: list[tuple[int, int], float, float] = [(9, 9), 1.5, 1.5],
     canny_thresh: tuple[int, int] = (200, 300),
     angles_thresh: int = 3,
-    aspect_ratio_correction: float = 1.10
+    aspect_ratio_correction: float = 1.10,
+    charset: list[str] = DEFAULT_CHARSET
 ) -> str:
     """
     Draw the input image in ASCII art. This function wraps the objects defined in ``process.py`` and ``renderer.py`` and orchestrate their workflow.
@@ -43,7 +44,7 @@ def asciify(
     angles = processor.calculate_angles(image=ds_img, k_size=angles_thresh)
     edges = processor.detect_edges(image=ds_img, blur=blur, canny_thresh=canny_thresh)
 
-    renderer = Renderer(color_mode=color_mode, charset=DEFAULT_CHARSET)
+    renderer = Renderer(color_mode=color_mode, charset=charset)
 
     if edges_detection:
         return renderer.draw_in_ascii_with_edges(
