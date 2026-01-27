@@ -58,11 +58,13 @@ The following options are available:
 - `-he, --height`: Provide custom height. If not specified, terminal's size is going to determine this value. This value can be specified only when `f_type='tall'`.
 - `-ar, --no_aspect_ratio`: Disable original aspect ratio's protection.
 - `-f, --factor_type`: Choose the downsampling factor type among the following values: `in_terminal`, `wide`, `tall`.
-- `-b, --blur`: Provide a list with kernel size as a tuple, std for x axis, std for y axis. For more details refere to the docs for `cv2.GaussianBlur`. Changing the dafault values allow to tweak edge detection.
+- `-b, --blur`: Provide a list with kernel size as a tuple, std for x axis, std for y axis. For more details refere to the docs for `cv2.GaussianBlur`. Changing the default values allow to tweak edge detection.
 - `ct, --canny_threshold`: Provide edges detection threshold as a tuple. For more details refer to the docs for `cv2.Canny`.
 - `-at, --angles_threshold`: Provide kernel size for angles calculation as an integer.
 - `-o, --output`: Provide the output's path. If not specified, uses stdout (e.g.: terminal).
 - `-A, --aspect_ratio_correction`: Provide the value by witch to divide the terminal's detected aspect ratio to account for line spacing.
+- `-p, --preset`: Choose one of the installed preset: `classic`, `extended`, `unicode_blocks`, `braille`.
+- `-c, --charset`: Provide a custom charset of any length (use quotes to include space).
 
 ### Details
 The different factors available are meant for different scenarios:
@@ -85,7 +87,8 @@ result = asciify(
     color_mode="bw",
     edges_detection=True,
     f_type="tall",
-    aspect_ratio_correction=1.10
+    aspect_ratio_correction=1.10,
+    charset=["."]
 )
 
 with open("output.txt", "w") as f:
@@ -154,9 +157,9 @@ edges = processor.detect_edges(
 
 renderer = Renderer(
     color_mode=color_mode,
-    charset=DEFAULT_CHARSET
-)
-
+    charset=DEFAULT_CHARSET # or any custom charset
+)                           # or any preset (see changelog
+                            # at the bottom of this doc)
 if edges_detection:
     result = renderer.draw_in_ascii_with_edges(img_hsv=img_hsv, angles=angles, edges=edges)
 else:
@@ -170,10 +173,23 @@ print(result)
     <br/>
     </p>
 
+<p align="center">
+    <img src="https://raw.githubusercontent.com/ndrscalia/asciify-them/main/cover_photos/unicode_small.png" alt="Example photo" />
+    <br/>
+    </p>
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/ndrscalia/asciify-them/main/cover_photos/unicode_tall.png" alt="Example photo" />
+    <br/>
+    </p>
+
 # Testing
 To test the codebase check `tests/README.md`.
 
 # Changelog
+- 1.1.0
+    - Custom charsets of any length can now be provided both in the cli and in the python library.
+    - New presets have been added: `CLASSIC_GRADIENT`, `EXTENDED_SMOOTH_GRADIENT`, `BRAILLE_CHARSET`, `UNICODE_BLOCKS`.
 - 1.0.4
     - Fix to get char's aspect ratio in the terminal in non-Unix systems.
 - 1.0.3
@@ -186,6 +202,6 @@ To test the codebase check `tests/README.md`.
     - First working version.
 
 # Future updates and possible contributions
-- Allow custom charset with different number of characters;
+- ~Allow custom charset with different number of characters~;
 - Allow tuning brightness for better piping to ansee;
 - Improve edges' detection.
