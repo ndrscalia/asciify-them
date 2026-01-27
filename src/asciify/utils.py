@@ -14,7 +14,19 @@ try:
 except ImportError:
     pass
 
-DEFAULT_CHARSET = [" ", ".", "-", "=", "+", "*", "x", "#", "$", "&", "X", "@"]
+DEFAULT_CHARSET = " .-=+*x#$&X@"
+CLASSIC_GRADIENT = " .':;il!i><+?-)(ItfjxnoC00@"
+EXTENDED_SMOOTH_GRADIENT = "…^‚:;Il!i><v+_—?1[ł{1)(|/tfjrxnuvczXYUJCLQØ0Zmwqpdbkhао*#МW&8⅝В@$"
+BRAILLE_CHARSET = "⠀⣀⣄⣤⣦⣶⣷⣿"
+UNICODE_BLOCKS = " ░▒▓█"
+
+CHARSET_PRESETS = {
+    "default": DEFAULT_CHARSET,
+    "classic": CLASSIC_GRADIENT,
+    "extended": EXTENDED_SMOOTH_GRADIENT,
+    "braille": BRAILLE_CHARSET,
+    "unicode_blocks" : UNICODE_BLOCKS,
+    }
 
 def hsv_to_ansi(h, s, v):
     """Convert HSV (OpenCV: h: 0-360, s: 0-100, v: 0-100) to ANSI escape code"""
