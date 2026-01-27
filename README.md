@@ -173,13 +173,18 @@ print(result)
     <br/>
     </p>
 
-<p align="left">
-    <img src="https://raw.githubusercontent.com/ndrscalia/asciify-them/custom-charsets/cover_photos/unicode_small.png" alt="Example photo" />
-    <br/>
-    </p>
+This is what you can get using, for example, the Unicode blocks preset:
+```bash
+# left image
+asciify examples/images/girl.jpg --preset unicode_blocks
 
-<p align="right">
-    <img src="https://raw.githubusercontent.com/ndrscalia/asciify-them/custom-charsets/cover_photos/unicode_tall.png" alt="Example photo" />
+# right image (you will have to zoom out the terminal)
+asciify examples/images/girl.jpg -f tall -p unicode blocks
+```
+
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/ndrscalia/asciify-them/custom-charsets/cover_photos/side_by_side_unicode.jpg" alt="Example photo" />
     <br/>
     </p>
 
