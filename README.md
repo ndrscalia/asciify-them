@@ -5,8 +5,8 @@
     <br/>
     <img src="https://img.shields.io/badge/python-3.9+-blue.svg"
    />
-    <img src="https://img.shields.io/github/license/ndrscalia/ascii-art" />
-    <img src="https://img.shields.io/github/stars/ndrscalia/ascii-art?style=social" />
+    <img src="https://img.shields.io/github/license/ndrscalia/asciify-them" />
+    <img src="https://img.shields.io/github/stars/ndrscalia/asciify-them?style=social" />
     <a href="https://asciify-them.readthedocs.io/en/latest/"><img src="https://img.shields.io/badge/docs-read%20the%20docs-blue" /></a>
   </p>
 
@@ -21,7 +21,8 @@ Full documentation is available at:
 - **Colored output**: ANSI color codes allow to print colors (requires a modern terminal);
 - **Resizing flexibility**: Images are scaled to keep aspect ratio and fit the image to the terminal, but both options can be disabled;
 - **Edge detection**: Sobel and Canny algorithm are used to highlight edges;
-- **Output flexibility**: Resulting images can be saved in a file (both using the terminal to determine optimal size or providing custom height and/or width).
+- **Output flexibility**: Resulting images can be saved in a file (both using the terminal to determine optimal size or providing custom height and/or width);
+- **Custom charsets and presets**: You can now use different presets or provide a custom charset (any length is supported).
 
 # Installation
 The package can be installed through PyPi:<br/>
@@ -64,7 +65,7 @@ The following options are available:
 - `-o, --output`: Provide the output's path. If not specified, uses stdout (e.g.: terminal).
 - `-A, --aspect_ratio_correction`: Provide the value by witch to divide the terminal's detected aspect ratio to account for line spacing.
 - `-p, --preset`: Choose one of the installed preset: `classic`, `extended`, `unicode_blocks`, `braille`.
-- `-c, --charset`: Provide a custom charset of any length (use quotes to include space).
+- `-c, --charset`: Provide a custom charset of any length (use quotes to include space as a character).
 
 ### Details
 The different factors available are meant for different scenarios:
@@ -95,7 +96,7 @@ with open("output.txt", "w") as f:
     f.write(result)
 ```
 
-The `.txt` output can be used with `ansee` to get a `.png` file out of it.<br/>
+The `.txt` output can be used with [ansee](https://github.com/codersauce/ansee) to get a `.png` file out of it.<br/>
 If needed, the core classes can be used as follows:
 
 ```python
@@ -168,6 +169,7 @@ else:
 print(result)
 ```
 # Examples
+The following image compares the original input with the output you can get with the default options (except for `-f`, which was set to `tall`).
 <p align="center">
     <img src="https://raw.githubusercontent.com/ndrscalia/asciify-them/main/cover_photos/side_by_side.jpg" alt="Example photo" />
     <br/>
@@ -181,8 +183,6 @@ asciify examples/images/girl.jpg --preset unicode_blocks
 # right image (you will have to zoom out the terminal)
 asciify examples/images/girl.jpg -f tall -p unicode blocks
 ```
-
-
 <p align="center">
     <img src="https://raw.githubusercontent.com/ndrscalia/asciify-them/custom-charsets/cover_photos/side_by_side_unicode.jpg" alt="Example photo" />
     <br/>
