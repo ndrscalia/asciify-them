@@ -174,12 +174,12 @@ print(result)
     </p>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/ndrscalia/asciify-them/main/cover_photos/unicode_small.png" alt="Example photo" />
+    <img src="https://raw.githubusercontent.com/ndrscalia/asciify-them/custom-charsets/cover_photos/unicode_small.png" alt="Example photo" />
     <br/>
     </p>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/ndrscalia/asciify-them/main/cover_photos/unicode_tall.png" alt="Example photo" />
+    <img src="https://raw.githubusercontent.com/ndrscalia/asciify-them/custom-charsets/cover_photos/unicode_tall.png" alt="Example photo" />
     <br/>
     </p>
 
