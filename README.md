@@ -173,12 +173,12 @@ print(result)
     <br/>
     </p>
 
-<p align="center">
+<p align="left">
     <img src="https://raw.githubusercontent.com/ndrscalia/asciify-them/custom-charsets/cover_photos/unicode_small.png" alt="Example photo" />
     <br/>
     </p>
 
-<p align="center">
+<p align="right">
     <img src="https://raw.githubusercontent.com/ndrscalia/asciify-them/custom-charsets/cover_photos/unicode_tall.png" alt="Example photo" />
     <br/>
     </p>
