@@ -32,7 +32,7 @@ pip install asciify-them
 # or using uv
 uv tool install asciify-them
 ```
-But also from source:
+Or from source:
 ```
 git clone https://github.com/ndrscalia/asciify-them
 cd <repo-dir>
@@ -44,6 +44,9 @@ The software can also be used without installing it through uv:
 ```
 uvx --from asciify-them asciify path/to/image [OPTIONS]
 ```
+
+The package is also available on AUR and kindly kept up to date by [@HeadedBranch](https://github.com/HeadedBranch).
+
 # Usage
 This package requires a terminal emulator with true color support (e.g. kitty, alacritty, iTerm2).
 ## CLI
