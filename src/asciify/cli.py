@@ -1,6 +1,8 @@
 import argparse
 from pathlib import Path
 
+import cv2
+
 from .core import asciify
 from .utils import CHARSET_PRESETS
 
@@ -101,6 +103,16 @@ def main():
         help="Aspect ratio correction (default to 1.10)",
     )
 
+    parser.add_argument(
+        "-F",
+        "--format",
+        type=str,
+        choices=["text", "png"],
+        action="store",
+        default="text",
+        help="Output format: 'text' for ANSI-colored text, 'png' for PNG image (not compatible with edge detection). Charset ignored.",
+    )
+
     charset_group = parser.add_mutually_exclusive_group()
     charset_group.add_argument(
         "-c",
@@ -124,6 +136,9 @@ def main():
         print(f"Impossible to find {target_image}")
         raise SystemExit(1)
 
+    if args.format == "png" and args.edges:
+        parser.error("PNG export is not supported with edge detection")
+
     if args.preset:
         charset = list(CHARSET_PRESETS[args.preset])
     elif args.charset:
@@ -139,6 +154,7 @@ def main():
         "keep_aspect_ratio": args.no_aspect_ratio,
         "aspect_ratio_correction": args.aspect_ratio_correction,
         "charset": charset,
+        "output_format": args.format,
     }
 
     if args.width is not None:
@@ -158,9 +174,13 @@ def main():
 
     result = asciify(**kwargs)
 
-    if args.output is None:
+    if args.format == "png":
+        if args.output is None:
+            parser.error("Output path (-o) is required for PNG format")
+        bgr_image = cv2.cvtColor(result, cv2.COLOR_RGB2BGR)
+        cv2.imwrite(args.output, bgr_image)
+    elif args.output is None:
         print(result)
-
     else:
         with open(args.output, "w") as f:
             f.write(result)

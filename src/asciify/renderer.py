@@ -140,3 +140,27 @@ class Renderer:
             lines.append(line)
 
         return "\n".join("".join(line) for line in lines)
+
+    def draw_in_pixels(self, img_hsv: np.ndarray) -> np.ndarray:
+        """
+        Convert HSV image to RGB pixel array for PNG export.
+
+        Each character position in the charset corresponds to a brightness level,
+        but we preserve the original pixel color regardless of charset selection.
+        The charset is used only for brightness mapping in text output.
+
+        :param img_hsv: The downsampled image in HSV format.
+        :type img_hsv: np.ndarray
+        :return: RGB pixel array with shape (height, width, 3).
+        :rtype: np.ndarray
+        """
+        height, width = img_hsv.shape[:2]
+        pixels = np.zeros((height, width, 3), dtype=np.uint8)
+
+        for y, row in enumerate(img_hsv):
+            for x, pixel in enumerate(row):
+                h, s, v = pixel
+                r, g, b = self.hsv_to_rgb(h, s, v)
+                pixels[y, x] = [r, g, b]
+
+        return pixels

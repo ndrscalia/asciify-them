@@ -26,8 +26,9 @@ Full documentation is available at:
 # Installation
 The package can be installed through PyPi:<br/>
 ```
-# using pip
+# using pip/pipx
 pip install asciify-them
+pipx install asciify-them # pipx upgrade to update it
 
 # or using uv
 uv tool install asciify-them
@@ -49,6 +50,7 @@ The package is also available on AUR and kindly kept up to date by [@HeadedBranc
 
 # Usage
 This package requires a terminal emulator with true color support (e.g. kitty, alacritty, iTerm2).
+
 ## CLI
 The only required argument is the path to the image:
 ```
@@ -57,14 +59,15 @@ asciify <path/to/image> [OPTIONS]
 The following options are available:
 - `-bw, --black_white`: Set the output to black&white.
 - `-e, --edges`: Enable edge detection.
-- `-w, --width`: Provide custom width. If not specified, terminal's size is going to determine this value. This value can be specified only when `f_type='wide'`.
-- `-he, --height`: Provide custom height. If not specified, terminal's size is going to determine this value. This value can be specified only when `f_type='tall'`.
+- `-w, --width`: Provide custom width. If not specified, terminal's size is going to determine this value. This value can be specified only when `f_type='wide'`. It can be used whenever if `--format png`.
+- `-he, --height`: Provide custom height. If not specified, terminal's size is going to determine this value. This value can be specified only when `f_type='tall'`. It can be used whenever if `--format png`.
 - `-ar, --no_aspect_ratio`: Disable original aspect ratio's protection.
 - `-f, --factor_type`: Choose the downsampling factor type among the following values: `in_terminal`, `wide`, `tall`.
-- `-b, --blur`: Provide a list with kernel size as a tuple, std for x axis, std for y axis. For more details refere to the docs for `cv2.GaussianBlur`. Changing the default values allow to tweak edge detection.
+- `-F, --format`: Choose the format. Default to `text`, but `png` available to simply obtain a downsampled `.png` image with a pixel art look[^1]. When using `--format png`, you can still provide only height or only width (the other is calculated to preserve aspect ratio). You can also provide both. `--factor_type` is overridden.
+- `-b, --blur`: Provide a list with kernel size as a tuple, std for x axis, std for y axis. For more details refer to the docs for `cv2.GaussianBlur`. Changing the default values allow to tweak edge detection.
 - `ct, --canny_threshold`: Provide edges detection threshold as a tuple. For more details refer to the docs for `cv2.Canny`.
 - `-at, --angles_threshold`: Provide kernel size for angles calculation as an integer.
-- `-o, --output`: Provide the output's path. If not specified, uses stdout (e.g.: terminal).
+- `-o, --output`: Provide the output's path. If not specified, uses stdout (e.g.: terminal). This option is required if using `-F, --format png`.
 - `-A, --aspect_ratio_correction`: Provide the value by witch to divide the terminal's detected aspect ratio to account for line spacing.
 - `-p, --preset`: Choose one of the installed preset: `classic`, `extended`, `unicode_blocks`, `braille`.
 - `-c, --charset`: Provide a custom charset of any length (use quotes to include space as a character).
@@ -183,7 +186,7 @@ This is what you can get using, for example, the Unicode blocks preset:
 asciify examples/images/girl.jpg --preset unicode_blocks
 
 # right image (you will have to zoom out the terminal)
-asciify examples/images/girl.jpg -f tall -p unicode blocks
+asciify examples/images/girl.jpg -f tall -p unicode_blocks
 ```
 <p align="center">
     <img src="https://raw.githubusercontent.com/ndrscalia/asciify-them/custom-charsets/cover_photos/side_by_side_unicode.jpg" alt="Example photo" />
@@ -194,6 +197,8 @@ asciify examples/images/girl.jpg -f tall -p unicode blocks
 To test the codebase check `tests/README.md`.
 
 # Changelog
+- 1.1.1
+    - New `--format png` option to get a downsampled image with a pixel art look.
 - 1.1.0
     - Custom charsets of any length can now be provided both in the cli and in the python library.
     - New presets have been added: `CLASSIC_GRADIENT`, `EXTENDED_SMOOTH_GRADIENT`, `BRAILLE_CHARSET`, `UNICODE_BLOCKS`.
@@ -212,3 +217,5 @@ To test the codebase check `tests/README.md`.
 - ~Allow custom charset with different number of characters~;
 - Allow tuning brightness for better piping to ansee;
 - Improve edges' detection.
+
+[^1]:   With this option, the charset is ignored. The `.png` output is a downsampled version of the original image with original colors preserved. All presets produce identical output. Also `-A, --aspect_ratio_correction`, `-bw, --black_white`, and `-e, -edges_detection` (with all related sub-options) are ignored.

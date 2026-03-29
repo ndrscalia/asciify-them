@@ -109,6 +109,12 @@ class ImgProcessor:
             return f
 
         else:
+            if f_type == "pixel":
+                fh = max(1, m // term_height)
+                fw = max(1, n // term_width)
+                f = max(fh, fw)
+                return f
+
             fh = max(1, m // (term_height - term_height // 100 * 10))
             fw = max(1, n // (term_width - term_width // 100 * 10))
 
@@ -148,14 +154,24 @@ class ImgProcessor:
             return img
 
         else:
-            img = np.zeros((m // f[0], n // f[1], 3), dtype=np.uint8)
+            if isinstance(f, int):
+                img = np.zeros((m // f, n // f, 3), dtype=np.uint8)
 
-            for i in range(0, m, f[0]):
-                for j in range(0, n, f[1]):
-                    try:
-                        img[i // f[0]][j // f[1]] = self.image[i][j]
-                    except IndexError:
-                        pass
+                for i in range(0, m, f):
+                    for j in range(0, n, f):
+                        try:
+                            img[i // f][j // f] = self.image[i][j]
+                        except IndexError:
+                            pass
+            else:
+                img = np.zeros((m // f[0], n // f[1], 3), dtype=np.uint8)
+
+                for i in range(0, m, f[0]):
+                    for j in range(0, n, f[1]):
+                        try:
+                            img[i // f[0]][j // f[1]] = self.image[i][j]
+                        except IndexError:
+                            pass
 
             return img
 
